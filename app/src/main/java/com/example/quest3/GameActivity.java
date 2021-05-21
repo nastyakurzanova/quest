@@ -18,16 +18,16 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity {
     private TextView textMain;
     private Button mainMenu;
-    private Button button1;
-    private Button button2;
-    private Button button3;
+    private Button buttonUp;
+    private Button buttonMiddle;
+    private Button buttonDown;
     private Button read;
     protected static final int RESULT_SPEECH = 1;
     public int i;
     public int j;
     //Два массива с текстами сюжета
-    private final Object[] Ending = new Object[]{R.string.Endingdeath};
-    private final Object[] Arraystories = new Object[]{R.string.s1, R.string.s2, R.string.s3, R.string.s4, R.string.s5, R.string.s6, R.string.s7, R.string.s8, R.string.SLetter, R.string.SBook, R.string.SNote, R.string.s11, R.string.s12, R.string.s13, R.string.s14, R.string.SBathroom, R.string.SKitchen, R.string.s17, R.string.s18, R.string.end};
+    private final Object[] ending = new Object[]{R.string.Endingdeath};
+    private final Object[] arraystories = new Object[]{R.string.s1, R.string.s2, R.string.s3, R.string.s4, R.string.s5, R.string.s6, R.string.s7, R.string.s8, R.string.SLetter, R.string.SBook, R.string.SNote, R.string.s11, R.string.s12, R.string.s13, R.string.s14, R.string.SBathroom, R.string.SKitchen, R.string.s17, R.string.s18, R.string.end};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +36,16 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         textMain = findViewById(R.id.textStory);
         mainMenu = findViewById(R.id.mainMenu);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
+        buttonUp = findViewById(R.id.buttonUp);
+        buttonMiddle = findViewById(R.id.buttonMiddle);
+        buttonDown = findViewById(R.id.buttonDown);
         read = findViewById(R.id.noLook);
         i = 0;
         j = 0;
         //нажатие на экран, смена текста
         textMain.setOnClickListener(view -> {
             try {
-                transition(Arraystories[i]);
+                transition(arraystories[i]);
                 i++;
             } catch (Exception e) {
                 Log.e("Error", toString());
@@ -69,32 +69,32 @@ public class GameActivity extends AppCompatActivity {
         setButton3();
         setRead();
         if (i == 7 || i == 8 || i == 9 || i == 10) { //первое разветвление. на выбор что можно посмотреть. Пересматривать объекты можно много раз
-            button1.setVisibility(View.VISIBLE);
-            button1.setClickable(true);
-            button2.setVisibility(View.VISIBLE);
-            button2.setClickable(true);
-            button3.setVisibility(View.VISIBLE);
-            button3.setClickable(true);
+            buttonUp.setVisibility(View.VISIBLE);
+            buttonUp.setClickable(true);
+            buttonMiddle.setVisibility(View.VISIBLE);
+            buttonMiddle.setClickable(true);
+            buttonDown.setVisibility(View.VISIBLE);
+            buttonDown.setClickable(true);
             read.setVisibility(View.VISIBLE);
             read.setClickable(true);
-            button1.setTextColor(Color.WHITE);
-            button1.setText("Письмо");
-            button2.setTextColor(Color.WHITE);
-            button2.setText("Записку");
-            button3.setTextColor(Color.WHITE);
-            button3.setText("Книгу");
+            buttonUp.setTextColor(Color.WHITE);
+            buttonUp.setText("Письмо");
+            buttonMiddle.setTextColor(Color.WHITE);
+            buttonMiddle.setText("Записку");
+            buttonDown.setTextColor(Color.WHITE);
+            buttonDown.setText("Книгу");
             read.setTextColor(Color.WHITE);
             read.setText("Читать дальше");
         }
         if (i == 14) {
-            button1.setVisibility(View.VISIBLE);
-            button1.setClickable(true);
-            button2.setVisibility(View.VISIBLE);
-            button2.setClickable(true);
-            button1.setTextColor(Color.WHITE);
-            button1.setText("На кухню");
-            button2.setTextColor(Color.WHITE);
-            button2.setText("В ванную");
+            buttonUp.setVisibility(View.VISIBLE);
+            buttonUp.setClickable(true);
+            buttonMiddle.setVisibility(View.VISIBLE);
+            buttonMiddle.setClickable(true);
+            buttonUp.setTextColor(Color.WHITE);
+            buttonUp.setText("На кухню");
+            buttonMiddle.setTextColor(Color.WHITE);
+            buttonMiddle.setText("В ванную");
         }
         if (i == 19) {
             // голосовой обработчик
@@ -108,8 +108,6 @@ public class GameActivity extends AppCompatActivity {
                         "Текст не распознан",
                         Toast.LENGTH_SHORT).show();
             }
-        }
-        if (i == 19) {
             // при прохождении игры можно вернутся на главный экран
             textMain.setBackgroundResource(R.drawable.map);
             mainMenu.setTextColor(Color.WHITE);
@@ -120,64 +118,64 @@ public class GameActivity extends AppCompatActivity {
         textMain.setText((Integer) o);
     }
 
-   // ьетод для кнопок
+    // метод для кнопок
     public void pressing() {
         mainMenu.setOnClickListener(view -> {
             final Intent intent = new Intent(GameActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        button1.setOnClickListener(view -> {
+        buttonUp.setOnClickListener(view -> {
             if (i == 8) {
-                transition(Arraystories[8]);
+                transition(arraystories[8]);
                 setButton1();
             }
             if (i == 15) {
-                transition(Arraystories[16]);
+                transition(arraystories[16]);
                 setButton1();
                 i = 17;
             }
         });
 
-        button2.setOnClickListener(view -> {
+        buttonMiddle.setOnClickListener(view -> {
             if (i == 8) {
-                transition(Arraystories[10]);
+                transition(arraystories[10]);
                 setButton2();
             }
             if (i == 15) {
-                transition(Arraystories[15]);
+                transition(arraystories[15]);
                 setButton1();
                 i = 17;
             }
         });
 
 
-        button3.setOnClickListener(view -> {
-            transition(Arraystories[9]);
+        buttonDown.setOnClickListener(view -> {
+            transition(arraystories[9]);
             setButton3();
         });
 
         read.setOnClickListener(view -> {
             i = 12;
-            transition(Arraystories[11]);
+            transition(arraystories[11]);
             setRead();
         });
 
     }
 
     public void setButton1() {
-        button1.setVisibility(View.GONE);
-        button1.setClickable(false);
+        buttonUp.setVisibility(View.GONE);
+        buttonUp.setClickable(false);
     }
 
     public void setButton2() {
-        button2.setVisibility(View.GONE);
-        button2.setClickable(false);
+        buttonMiddle.setVisibility(View.GONE);
+        buttonMiddle.setClickable(false);
     }
 
     public void setButton3() {
-        button3.setVisibility(View.GONE);
-        button3.setClickable(false);
+        buttonDown.setVisibility(View.GONE);
+        buttonDown.setClickable(false);
     }
 
     public void setRead() {
@@ -199,7 +197,7 @@ public class GameActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     if (!text.contains("карта")) {
-                        textMain.setText((Integer) Ending[j]);
+                        textMain.setText((Integer) ending[j]);
                         Toast.makeText(getApplicationContext(), "Неправльное слово!", Toast.LENGTH_LONG).show();
                         textMain.setBackgroundResource(R.drawable.blue102);
                     }

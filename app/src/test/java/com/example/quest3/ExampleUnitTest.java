@@ -14,4 +14,22 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+
+
+
+}
+class Note{
+    public String to;
+    public String from;
+    public String heading;
+    public String body;
+    public Note(){
+    }
+    public Note(String toIn, String fromIn, String headingIn, String body){
+        to = toIn;
+        from = fromIn;
+        heading = headingIn;
+        body = bodyIn;
+    }
 }
